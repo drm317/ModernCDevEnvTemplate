@@ -1,0 +1,36 @@
+{
+	"name": "Modern C Development Environment",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"features": {},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cmake-tools",
+				"llvm-vs-code-extensions.vscode-clangd",
+				"xaver.clang-format"
+			],
+			"settings": {
+				"C_Cpp.default.cStandard": "c99",
+				"C_Cpp.default.compilerPath": "/usr/bin/gcc",
+				"C_Cpp.default.includePath": [
+					"${workspaceFolder}/include",
+					"${workspaceFolder}/test"
+				],
+				"files.associations": {
+					"*.h": "c",
+					"*.c": "c"
+				},
+				"editor.formatOnSave": true,
+				"C_Cpp.clang_format_style": "file",
+				"clang-format.executable": "/usr/bin/clang-format"
+			}
+		}
+	},
+	"postCreateCommand": "make clean && make test",
+	"remoteUser": "vscode"
+}
