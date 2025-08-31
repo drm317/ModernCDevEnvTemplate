@@ -31,6 +31,6 @@
 			}
 		}
 	},
-	"postCreateCommand": "make clean && make test",
+	"postCreateCommand": "mkdir -p build && cd build && cmake .. && cmake --build . && cmake --build . --target test",
 	"remoteUser": "vscode"
 }

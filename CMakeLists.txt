@@ -10,13 +10,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
 # Include directories
 include_directories(include)
 
-# Source files
-file(GLOB SOURCES "src/*.c")
+# Library source files
 file(GLOB LIB_SOURCES "src/*.c")
-list(REMOVE_ITEM LIB_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/main.c")
-
-# Main executable
-add_executable(main ${SOURCES})
 
 # Test configuration
 file(GLOB TEST_SOURCES "test/*.c")
@@ -27,11 +22,6 @@ add_executable(test_runner ${LIB_SOURCES} ${TEST_SOURCES} ${TEST_UNITY_SOURCES})
 target_include_directories(test_runner PRIVATE test)
 
 # Custom targets for compatibility with original workflow
-add_custom_target(run
-    COMMAND main
-    DEPENDS main
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-)
 
 add_custom_target(test
     COMMAND test_runner

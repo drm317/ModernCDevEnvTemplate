@@ -27,7 +27,9 @@ RUN apt-get update \
         clang \
         clang-format \
         clang-tidy \
-        # Install other useful tools
+        # Install Ruby and other useful tools
+        ruby \
+        ruby-dev \
         curl \
         wget \
         zip \
@@ -61,6 +63,7 @@ ENV DEBIAN_FRONTEND=dialog
 
 # Set the default user
 USER $USERNAME
+
 
 # Set working directory
 WORKDIR /workspace
