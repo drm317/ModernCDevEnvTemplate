@@ -14,7 +14,7 @@ A simple template for C programming projects with a standard directory structure
 ├── .devcontainer/      # Development container configuration
 │   ├── devcontainer.json
 │   └── Dockerfile
-├── Makefile            # Build configuration
+├── CMakeLists.txt      # Build configuration
 ├── .clang-format       # Code formatting rules
 ├── .clang-tidy         # Static analysis configuration
 └── .gitignore          # Git ignore rules
@@ -24,7 +24,7 @@ A simple template for C programming projects with a standard directory structure
 
 ### Option 1: Local Development
 - GCC compiler
-- Make build system
+- CMake build system
 - Clang tools (clang-format, clang-tidy) for code formatting and linting
 
 ### Option 2: Development Container (Recommended)
@@ -39,7 +39,7 @@ The project includes a `.devcontainer` configuration that provides a consistent 
 1. Open the project in Visual Studio Code
 2. When prompted, click "Reopen in Container" or use Command Palette > "Dev Containers: Reopen in Container"
 3. The container will build automatically and install all dependencies
-4. Run `make test` to verify everything is working
+4. Run `cmake --build build && cmake --build build --target test` to verify everything is working
 
 ### Using Local Development
 Ensure all prerequisites are installed, then proceed with the building instructions below.
@@ -48,22 +48,33 @@ Ensure all prerequisites are installed, then proceed with the building instructi
 
 ### Build the project
 ```bash
-make
+mkdir -p build
+cd build
+cmake ..
+cmake --build .
 ```
 
 ### Build and run
 ```bash
-make run
+mkdir -p build
+cd build
+cmake ..
+cmake --build .
+cmake --build . --target run
 ```
 
 ### Clean build files
 ```bash
-make clean
+rm -rf build
 ```
 
 ### Run tests
 ```bash
-make test
+mkdir -p build
+cd build
+cmake ..
+cmake --build .
+cmake --build . --target test
 ```
 Compiles and runs all unit tests using the Unity testing framework.
 
@@ -71,13 +82,19 @@ Compiles and runs all unit tests using the Unity testing framework.
 
 ### Format code
 ```bash
-make format
+mkdir -p build
+cd build
+cmake ..
+cmake --build . --target format
 ```
 Automatically formats all source and header files using clang-format.
 
 ### Lint code
 ```bash
-make tidy
+mkdir -p build
+cd build
+cmake ..
+cmake --build . --target tidy
 ```
 Runs clang-tidy to check for potential issues and style violations.
 
@@ -86,7 +103,7 @@ Runs clang-tidy to check for potential issues and style violations.
 1. Place source files (`.c`) in the `src/` directory
 2. Place header files (`.h`) in the `include/` directory  
 3. Place test files (`test_*.c`) in the `test/` directory
-4. The Makefile will automatically compile all `.c` files in `src/` and `test/`
+4. CMake will automatically compile all `.c` files in `src/` and `test/`
 
 ## Testing
 
